@@ -22,8 +22,8 @@ jobs:
         tar --transform=s,go,go1.19, -zxf /tmp/golang1.19.tar.gz
         rm -rf /usr/local/go*
         sudo mv go1.19 /usr/local/
-        sudo ln -s /usr/local/go1.19 /usr/local/go
-        sudo ln -s /usr/local/go/bin/go /usr/bin/go
+        sudo ln -fs /usr/local/go1.19 /usr/local/go
+        sudo ln -fs /usr/local/go/bin/go /usr/bin/go
         echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
         sudo apt update
         sudo apt install nfpm
