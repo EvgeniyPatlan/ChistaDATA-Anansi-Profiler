@@ -35,13 +35,19 @@ jobs:
       run:  mkdir -p packages
 
     - name: Build rpm
-      run: nfpm pkg --packager rpm --target ./
+      run: nfpm pkg --packager rpm --target ./packages
 
     - name: Build deb
-      run: nfpm pkg --packager deb --target ./
+      run: nfpm pkg --packager deb --target ./packages
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
-        name: packages
-        path: packages
+        name: DEB
+        path: packages/*.deb
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: RPM
+        path: packages/*.rpm
