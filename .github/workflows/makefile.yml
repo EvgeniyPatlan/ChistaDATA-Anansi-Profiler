@@ -47,7 +47,7 @@ jobs:
         path: packages/*.deb
         
     - name: Upload RPM
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: project-binary
         path: packages/*.rpm
