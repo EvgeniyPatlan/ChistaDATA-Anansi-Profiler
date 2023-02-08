@@ -52,7 +52,10 @@ jobs:
         name: RPM
         path: packages/*.rpm
         
-    - name: Release created RPM packages
-      uses: softprops/action-gh-release@v1
+    - name: Upload RPM
+      uses: crazy-max/ghaction-upload-release@v1
       with:
-        files: packages/*.rpm
+        file: packages/*.rpm
+        asset_name: RPM
+        overwrite: true
+        type: file
