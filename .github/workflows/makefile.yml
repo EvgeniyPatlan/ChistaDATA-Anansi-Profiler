@@ -53,7 +53,7 @@ jobs:
         path: packages/*.rpm
         
     - name: Upload RPM
-      uses: crazy-max/ghaction-upload-release@v1
+      uses: crazy-max/ghaction-upload-release@v2
       with:
         file: packages/*.rpm
         asset_name: RPM
