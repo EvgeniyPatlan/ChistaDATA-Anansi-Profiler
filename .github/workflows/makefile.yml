@@ -46,9 +46,13 @@ jobs:
         name: DEB
         path: packages/*.deb
         
-    - name: Upload a Build Artifact
+    - name: Upload RPM
       uses: actions/upload-artifact@v1
       with:
-        name: RPM
+        name: project-binary
         path: packages/*.rpm
+    - name: Download Binary
+      uses: actions/download-artifact@v1
+      with:
+        name: project-binary
 
