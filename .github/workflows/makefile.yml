@@ -51,3 +51,8 @@ jobs:
       with:
         name: RPM
         path: packages/*.rpm
+        
+    - name: Release created RPM packages
+      uses: softprops/action-gh-release@v1
+      with:
+        files: packages/*.rpm
