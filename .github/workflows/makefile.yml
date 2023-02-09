@@ -55,18 +55,5 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: project-binary
-        
-        
-    - name: 'Publish'
-      run: |-
-        mkdir "dist"
-        ls -la
-        pwd
-        cp ./packages/* dist/
-        echo "This page is meant to host my-project-rpm.rpm packages for download" >> "dist/index.html"
-        git config --global user.email "evgeniypatlan@gmail.com"
-        git config --global user.name "Evgeniy Patlan"
-        git add --all
-        git commit -m "Add new packages for download"
-        git push
+
 
