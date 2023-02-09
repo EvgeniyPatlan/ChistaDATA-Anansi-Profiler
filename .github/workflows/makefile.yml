@@ -49,11 +49,8 @@ jobs:
     - name: Upload RPM
       uses: actions/upload-artifact@v3.1.2
       with:
-        name: project-binary
+        name: RPM
         path: packages/*.rpm
-    - name: Download Binary
-      uses: actions/download-artifact@v1
-      with:
-        name: project-binary
+
 
 
