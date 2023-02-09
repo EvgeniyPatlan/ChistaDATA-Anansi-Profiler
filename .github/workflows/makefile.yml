@@ -60,6 +60,8 @@ jobs:
     - name: 'Publish'
       run: |-
         mkdir "dist"
+        ls -la
+        pwd
         cp "packages/*" "dist/"
         echo "This page is meant to host my-project-rpm.rpm packages for download" >> "dist/index.html"
         git add --all
