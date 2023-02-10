@@ -35,6 +35,7 @@ jobs:
         cp anansi-profiler.tar.gz rpmbuild/SOURCES/
         cd rpmbuild/SPECS/
         tar vxzf ../SOURCES/anansi-profiler.tar.gz --wildcards '*/packaging/rpm/*.spec' --strip=3
+        sed -i 's:BuildRequires:#BuildRequires:' anansi-profiler.spec
         cd ../../
         rpmbuild -bs --define "_topdir $PWD/rpmbuild" rpmbuild/SPECS/anansi-profiler.spec
         SRC=$(ls rpmbuild/SRPMS/ | grep src.rpm)
