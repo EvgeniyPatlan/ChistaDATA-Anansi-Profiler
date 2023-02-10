@@ -46,10 +46,10 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: anansi-profiler-${{ env.GITHUB_SHA }}.srpm
-        path: rpmbuild/SRPMS/*.src.rpm
+        path: ../rpmbuild/SRPMS/*.src.rpm
         
     - name: Publish RPM package
       uses: actions/upload-artifact@v2
       with:
         name: anansi-profiler-${{ env.GITHUB_SHA }}.rpm
-        path: rpmbuild/RPMS/x86_64/anansi-profiler*.rpm
+        path: ../rpmbuild/RPMS/x86_64/anansi-profiler*.rpm
