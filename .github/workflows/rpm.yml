@@ -1,0 +1,42 @@
+name: Build and Publish RPM Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up RPM build environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y rpm wget git
+    - name: Install golang
+      run: |
+        wget https://golang.org/dl/go1.19.linux-amd64.tar.gz -O /tmp/golang1.19.tar.gz
+        tar --transform=s,go,go1.19, -zxf /tmp/golang1.19.tar.gz
+        rm -rf /usr/local/go*
+        sudo mv go1.19 /usr/local/
+        sudo ln -fs /usr/local/go1.19 /usr/local/go
+        sudo ln -fs /usr/local/go/bin/go /usr/bin/go
+
+    - name: Build RPM package
+      run: |
+        cd ../
+        ls
+        exit 1
+        mkdir -vp rpmbuild/{SOURCES,SPECS,BUILD,SRPMS,RPMS}
+        # Replace with your package-specific build commands
+        rpmbuild --target x86_64 --define "_topdir $PWD/rpmbuild" -bb your-package.spec
+
+    - name: Publish RPM package
+      uses: actions/upload-artifact@v2
+      with:
+        name: your-package-${{ env.GITHUB_SHA }}.rpm
+        path: rpmbuild/RPMS/x86_64/your-package-${{ env.GITHUB_SHA }}.rpm
