@@ -29,7 +29,7 @@ jobs:
     - name: Build RPM package
       run: |
         cd ../
-        cp ChistaDATA-Anansi-Profiler anansi-profiler
+        cp -r ChistaDATA-Anansi-Profiler anansi-profiler
         tar -zcvf anansi-profiler.tar.gz anansi-profiler
         mkdir -vp rpmbuild/{SOURCES,SPECS,BUILD,SRPMS,RPMS}
         cp anansi-profiler.tar.gz rpmbuild/SOURCES/
