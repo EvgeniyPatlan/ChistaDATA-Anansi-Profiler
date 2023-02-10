@@ -39,17 +39,18 @@ jobs:
         cd ../../
         rpmbuild -bs --define "_topdir $PWD/rpmbuild" rpmbuild/SPECS/anansi-profiler.spec
         SRC=$(ls rpmbuild/SRPMS/ | grep src.rpm)
-        rpmbuild --define "_topdir $PWD/rpmbuild" --rebuild rpmbuild/SRPMS/$SRC
-
+        cp rpmbuild/SRPMS/*.src.rpm ChistaDATA-Anansi-Profiler/rpmbuild/SRPMS/ --define "_topdir $PWD/rpmbuild" --rebuild rpmbuild/SRPMS/$SRC
+        mv rpmbuild ChistaDATA-Anansi-Profiler/
+        cd ChistaDATA-Anansi-Profiler/
 
     - name: Publish SRPM package
       uses: actions/upload-artifact@v2
       with:
         name: anansi-profiler-${{ env.GITHUB_SHA }}.srpm
-        path: ../rpmbuild/SRPMS/*.src.rpm
+        path: rpmbuild/SRPMS/*.src.rpm
         
     - name: Publish RPM package
       uses: actions/upload-artifact@v2
       with:
         name: anansi-profiler-${{ env.GITHUB_SHA }}.rpm
-        path: ../rpmbuild/RPMS/x86_64/anansi-profiler*.rpm
+        path: rpmbuild/RPMS/x86_64/anansi-profiler*.rpm
