@@ -16,7 +16,7 @@ jobs:
     - name: Set up RPM build environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y rpm wget git
+        sudo apt-get install -y rpm wget git make
     - name: Install golang
       run: |
         wget https://golang.org/dl/go1.19.linux-amd64.tar.gz -O /tmp/golang1.19.tar.gz
