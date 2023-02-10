@@ -29,14 +29,26 @@ jobs:
     - name: Build RPM package
       run: |
         cd ../
-        ls
-        exit 1
+        mv ChistaDATA-Anansi-Profiler anansi-profiler
+        tar -zcvf anansi-profiler.tar.gz anansi-profiler
         mkdir -vp rpmbuild/{SOURCES,SPECS,BUILD,SRPMS,RPMS}
-        # Replace with your package-specific build commands
-        rpmbuild --target x86_64 --define "_topdir $PWD/rpmbuild" -bb your-package.spec
+        cp anansi-profiler.tar.gz rpmbuild/SOURCES/
+        cd rpmbuild/SPEC/
+        tar vxzf ../SOURCES/anansi-profiler.tar.gz --wildcards '*/packaging/rpm/*.spec' --strip=3
+        cd ../../
+        rpmbuild -bs --define "_topdir $PWD/rpmbuild" rpmbuild/SPECS/anansi-profiler.spec
+        SRC=$(ls rpmbuild/SRPMS/ | grep src.rpm)
+        rpmbuild --define "_topdir $PWD/rpmbuild" --rebuild rpmbuild/SRPMS/$SRC
+        
 
+    - name: Publish SRPM package
+      uses: actions/upload-artifact@v2
+      with:
+        name: anansi-profiler-${{ env.GITHUB_SHA }}.srpm
+        path: rpmbuild/SRPMS/*.src.rpm
+        
     - name: Publish RPM package
       uses: actions/upload-artifact@v2
       with:
-        name: your-package-${{ env.GITHUB_SHA }}.rpm
-        path: rpmbuild/RPMS/x86_64/your-package-${{ env.GITHUB_SHA }}.rpm
+        name: anansi-profiler-${{ env.GITHUB_SHA }}.rpm
+        path: rpmbuild/RPMS/x86_64/anansi-profiler*.rpm
